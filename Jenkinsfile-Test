@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
+                    mvn clean package -DskipTests
+                }
+           }
+
+            post {
+                success {
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
+    }
+}
