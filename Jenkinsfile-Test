@@ -18,7 +18,7 @@ pipeline {
 stage('Maven Package') {
             steps {
                 withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
-                    sh "mvn package -DskipTests""
+                    sh "mvn package -DskipTests"
                 }
            }
 
