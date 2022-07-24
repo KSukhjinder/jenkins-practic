@@ -1,42 +1,31 @@
 pipeline {
     agent any
-
     stages {
-        stage('Maven Clean') {
-            steps {
-                withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
-                    sh "mvn clean"
-                }
-           }}
-
-
-        stage('Sleep') {
-                    steps {
-                       sleep 60
-                   }}
-
-stage('Maven Package') {
+        stage('Maven Package') {
             steps {
                 withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
                     sh "mvn package -DskipTests"
                 }
-           }}
-
-          stage('Build and Publish Docker Image'){
-          steps {
-          sh "docker login -u=reactivestaxtechsukhjinder -p=docker123"
-          sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
-          sh "docker images"
-          sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
-          }
-          }
-
-
-            post {
-                success {
-                    archiveArtifacts 'target/*.jar'
-                }
             }
         }
+        stage('Build and Publish Docker Image') {
+            steps {
+                sh "docker login -u=reactivestaxtechsukhjinder -p=docker123"
+                sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker images"
+                sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker rm reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker images"
+            }
+        }
+        stage('Deploy'){
+            steps{
+                sleep 10
+                sh "docker pull reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker run -p8082:8080 --rm reactivestaxtechsukhjinder/jenkins-demo"
+            }
+        }
+
     }
+}
 
