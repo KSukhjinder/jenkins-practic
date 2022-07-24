@@ -14,7 +14,7 @@ pipeline {
                 sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
                 sh "docker images"
                 sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker rm reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker rmi reactivestaxtechsukhjinder/jenkins-demo"
                 sh "docker images"
             }
         }
