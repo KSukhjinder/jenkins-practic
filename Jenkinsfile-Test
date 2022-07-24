@@ -24,7 +24,7 @@ stage('Maven Package') {
 
           stage('Build and Publish Docker Image'){
           steps {
-          sh "docker login -u="reactivestaxtechsukhjinder" -p="docker123"
+          sh "docker login -u=reactivestaxtechsukhjinder -p=docker123"
           sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
           sh "docker images"
           sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
