@@ -22,7 +22,7 @@ pipeline {
             steps{
                 sleep 10
                 sh "docker pull reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker run -p8082:8080 --rm reactivestaxtechsukhjinder/jenkins-demo"
+                sh "docker run -p8082:9990 --rm reactivestaxtechsukhjinder/jenkins-demo"
             }
         }
 
