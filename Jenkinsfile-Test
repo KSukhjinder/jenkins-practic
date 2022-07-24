@@ -13,14 +13,14 @@ pipeline {
         stage('Sleep') {
                     steps {
                        sleep 60
-                   }
+                   }}
 
 stage('Maven Package') {
             steps {
                 withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
                     sh "mvn package -DskipTests"
                 }
-           }
+           }}
 
           stage('Build and Publish Docker Image'){
           steps {
@@ -31,7 +31,7 @@ stage('Maven Package') {
           }
           }
 
-          }
+
             post {
                 success {
                     archiveArtifacts 'target/*.jar'
@@ -39,4 +39,4 @@ stage('Maven Package') {
             }
         }
     }
-}
+
