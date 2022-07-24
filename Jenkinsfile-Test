@@ -2,13 +2,36 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Maven Clean') {
             steps {
                 withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
-                    sh "mvn clean package -DskipTests"
+                    sh "mvn clean"
+                }
+           }}
+
+
+        stage('Sleep') {
+                    steps {
+                       sleep 60
+                   }
+
+stage('Maven Package') {
+            steps {
+                withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
+                    sh "mvn package -DskipTests""
                 }
            }
 
+          stage('Build and Publish Docker Image'){
+          steps {
+          sh "docker login -u="reactivestaxtechsukhjinder" -p="docker123"
+          sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
+          sh "docker images"
+          sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
+          }
+          }
+
+          }
             post {
                 success {
                     archiveArtifacts 'target/*.jar'
