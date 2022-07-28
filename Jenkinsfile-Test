@@ -1,31 +1,33 @@
-pipeline {
-    agent { label 'my-jenkins-slave' }
-    stages {
-        stage('Maven Package') {
-            steps {
-                withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
-                    sh "mvn package -DskipTests"
-                }
-            }
-        }
-        stage('Build and Publish Docker Image') {
-            steps {
-                sh "docker login -u=reactivestaxtechsukhjinder -p=docker123"
-                sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker images"
-                sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker rmi reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker images"
-            }
-        }
-        stage('Deploy'){
-            steps{
-                sleep 10
-                sh "docker pull reactivestaxtechsukhjinder/jenkins-demo"
-                sh "docker run -p8082:9990 --rm reactivestaxtechsukhjinder/jenkins-demo"
-            }
-        }
-
-    }
-}
-
+//pipeline {
+//    agent {
+//        label 'my-jenkins-slave'
+//    }
+//    stages {
+//        stage('Maven Package') {
+//            steps {
+//                withMaven(jdk: 'JDK', maven: 'Maven', mavenLocalRepo: '/Users/sukhjinderkaur/.m2',) {
+//                    sh "mvn package -DskipTests"
+//                }
+//            }
+//        }
+//        stage('Build and Publish Docker Image') {
+//            steps {
+//                sh "docker login -u=reactivestaxtechsukhjinder -p=docker123"
+//                sh "docker build . -t reactivestaxtechsukhjinder/jenkins-demo"
+//                sh "docker images"
+//                sh "docker push reactivestaxtechsukhjinder/jenkins-demo"
+//                sh "docker rmi reactivestaxtechsukhjinder/jenkins-demo"
+//                sh "docker images"
+//            }
+//        }
+//        stage('Deploy'){
+//            steps{
+//                sleep 10
+//                sh "docker pull reactivestaxtechsukhjinder/jenkins-demo"
+//                sh "docker run -p8082:9990 --rm reactivestaxtechsukhjinder/jenkins-demo"
+//            }
+//        }
+//
+//    }
+//}
+//
