@@ -12,6 +12,7 @@
 	<artifactId>jenkins</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jenkins</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -63,6 +64,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>devops-integration</finalName>
 	</build>
 
 </project>
