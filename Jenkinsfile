@@ -28,8 +28,9 @@ pipeline{
         stage('Push image to hub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')])
-                    sh 'docker login -u reactivestaxtechsukhjinder -p ${dockerhubpwd}'
+//                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')])
+//                     sh 'docker login -u reactivestaxtechsukhjinder -p ${dockerhubpwd}'
+                        sh 'docker login -u=reactivestaxtechsukhjinder -p=docker123'
                 }
                 sh 'docker push reactivestaxtechsukhjinder/devops-integration'
             }
