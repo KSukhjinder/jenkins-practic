@@ -35,5 +35,12 @@ pipeline{
                 sh 'docker push reactivestaxtechsukhjinder/devops-integration'
             }
         }
+        stage('Deploy to k8s'){
+            steps{
+                script{
+                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'k8sconfigpwd')
+                }
+            }
+        }
     }
 }
