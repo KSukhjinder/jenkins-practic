@@ -21,7 +21,7 @@ public class JenkinsApplication {
 	}
 
 	@PostMapping("/save")
-	public TableEntity save(@RequestBody TableEntity entity ){
+	public TableEntity save(@RequestBody TableEntity entity){
 		TableEntity save = tableService.save(entity);
 		return save;
 
