@@ -15,7 +15,7 @@ public class JenkinsApplication {
 	@Autowired
 	TableServiceImpl tableService;
 
-	@GetMapping("/message")
+	@GetMapping("/")
 	public String message(){
 		return "Welcome..............";
 	}
